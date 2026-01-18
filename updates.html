@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>BrickBots FTC - Updates</title>
+   <link rel="icon" type="image/png" href="ftcteamlogo.png">
+   <link rel="shortcut icon" type="image/png" href="ftcteamlogo.png">
+   <link rel="apple-touch-icon" href="ftcteamlogo.png">
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <style>
+       :root {
+           --primary-dark: #0F172A;
+           --primary-navy: #1E293B;
+           --accent-green: #10B981;
+           --accent-green-dark: #059669;
+           --text-primary: #1F2937;
+           --text-secondary: #6B7280;
+           --bg-light: #F9FAFB;
+           --white: #FFFFFF;
+           --gradient-primary: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #059669 100%);
+           --gradient-accent: linear-gradient(135deg, #10B981 0%, #059669 100%);
+           --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+           --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+           --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+           --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+       }
+
+
+       * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+
+
+       html {
+           scroll-behavior: smooth;
+       }
+
+
+       body {
+           font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+           line-height: 1.7;
+           color: var(--text-primary);
+           background-color: var(--bg-light);
+           font-size: 16px;
+           -webkit-font-smoothing: antialiased;
+           -moz-osx-font-smoothing: grayscale;
+       }
+
+
+       .container {
+           max-width: 1280px;
+           margin: 0 auto;
+           padding: 0 2rem;
+       }
+
+
+       /* Navigation */
+       nav {
+           background: rgba(15, 23, 42, 0.95);
+           backdrop-filter: blur(10px);
+           padding: 0.05rem 0;
+           position: fixed;
+           top: 0;
+           width: 100%;
+           z-index: 1000;
+           box-shadow: var(--shadow-md);
+           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+       }
+
+
+       nav .container {
+           max-width: 1280px;
+           margin: 0 auto;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding: 0 2rem;
+       }
+
+
+       .nav-logo {
+           font-family: 'Montserrat', sans-serif;
+           font-size: 1.75rem;
+           font-weight: 700;
+           background: var(--gradient-accent);
+           -webkit-background-clip: text;
+           -webkit-text-fill-color: transparent;
+           background-clip: text;
+           text-decoration: none;
+           letter-spacing: -0.5px;
+           display: inline-flex;
+           align-items: center;
+           padding: 0 !important;
+           background: none !important;
+       }
+
+       .nav-logo::before {
+           display: none !important;
+       }
+
+       .nav-logo img {
+           height: 120px;
+           width: auto;
+           display: block;
+           transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+           animation: logoPulse 3s ease-in-out infinite;
+       }
+
+       @keyframes logoPulse {
+           0%, 100% {
+               filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.3));
+           }
+           50% {
+               filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.6));
+           }
+       }
+
+       .nav-logo:hover img {
+           transform: scale(1.08) translateY(-3px) rotate(2deg);
+           filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.8)) drop-shadow(0 5px 15px rgba(16, 185, 129, 0.4));
+           animation: none;
+       }
+
+       nav ul {
+           display: flex;
+           list-style: none;
+           gap: 0.5rem;
+       }
+
+
+       nav a {
+           color: rgba(255, 255, 255, 0.9);
+           text-decoration: none;
+           font-weight: 500;
+           font-size: 0.95rem;
+           padding: 0.5rem 1.1rem;
+           border-radius: 8px;
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+           position: relative;
+       }
+
+
+       nav a::before {
+           content: '';
+           position: absolute;
+           bottom: 0;
+           left: 50%;
+           transform: translateX(-50%);
+           width: 0;
+           height: 2px;
+           background: var(--accent-green);
+           transition: width 0.3s ease;
+       }
+
+
+       nav a:hover {
+           color: var(--white);
+           background: rgba(16, 185, 129, 0.1);
+       }
+
+
+       nav a:hover::before {
+           width: 60%;
+       }
+
+
+       nav a.active {
+           color: var(--accent-green);
+       }
+
+
+       /* Section Styles */
+       .updates-section {
+           padding: 8rem 0 6rem;
+           background: linear-gradient(180deg, var(--white) 0%, var(--bg-light) 100%);
+           margin-top: 80px;
+       }
+
+
+       .section-title {
+           font-size: clamp(2rem, 4vw, 3rem);
+           font-weight: 800;
+           text-align: center;
+           margin-bottom: 1rem;
+           color: var(--primary-dark);
+           font-family: 'Montserrat', sans-serif;
+           letter-spacing: -1px;
+           position: relative;
+       }
+
+
+       .section-subtitle {
+           text-align: center;
+           font-size: 1.125rem;
+           color: var(--text-secondary);
+           margin-bottom: 4rem;
+           max-width: 600px;
+           margin-left: auto;
+           margin-right: auto;
+       }
+
+
+       .updates-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+           gap: 2rem;
+           margin-bottom: 4rem;
+       }
+
+
+       .update-card {
+           background: var(--white);
+           border-radius: 20px;
+           overflow: hidden;
+           box-shadow: var(--shadow-md);
+           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+           border: 1px solid rgba(0, 0, 0, 0.05);
+           display: flex;
+           flex-direction: column;
+       }
+
+
+       .update-card:hover {
+           transform: translateY(-8px);
+           box-shadow: var(--shadow-xl);
+           border-color: rgba(16, 185, 129, 0.2);
+       }
+
+
+       .update-image {
+           height: 220px;
+           background: var(--gradient-accent);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           color: white;
+           font-size: 4rem;
+           position: relative;
+           overflow: hidden;
+       }
+
+
+       .update-image::before {
+           content: '';
+           position: absolute;
+           top: -50%;
+           left: -50%;
+           width: 200%;
+           height: 200%;
+           background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+           animation: pulse 4s ease-in-out infinite;
+       }
+
+
+       @keyframes pulse {
+           0%, 100% { transform: scale(1); opacity: 0.5; }
+           50% { transform: scale(1.1); opacity: 0.8; }
+       }
+
+
+       .update-image i {
+           position: relative;
+           z-index: 1;
+       }
+
+
+       .update-content {
+           padding: 2rem;
+           flex: 1;
+           display: flex;
+           flex-direction: column;
+       }
+
+
+       .update-date {
+           color: var(--accent-green);
+           font-weight: 600;
+           font-size: 0.875rem;
+           margin-bottom: 0.75rem;
+           text-transform: uppercase;
+           letter-spacing: 0.5px;
+       }
+
+
+       .update-title {
+           font-size: 1.5rem;
+           font-weight: 700;
+           margin-bottom: 1rem;
+           color: var(--primary-dark);
+           font-family: 'Montserrat', sans-serif;
+           line-height: 1.3;
+       }
+
+
+       .update-description {
+           color: var(--text-secondary);
+           line-height: 1.7;
+           font-size: 1rem;
+           flex: 1;
+       }
+
+
+       .btn {
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           padding: 1rem 2.5rem;
+           background: var(--gradient-accent);
+           color: white;
+           text-decoration: none;
+           border-radius: 12px;
+           font-weight: 600;
+           font-size: 1rem;
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+           border: none;
+           box-shadow: var(--shadow-lg);
+           cursor: pointer;
+       }
+
+
+       .btn:hover {
+           transform: translateY(-2px);
+           box-shadow: var(--shadow-xl);
+           background: linear-gradient(135deg, #059669 0%, #047857 100%);
+       }
+
+
+       .btn-container {
+           text-align: center;
+       }
+
+
+       /* Footer */
+       footer {
+           background: var(--primary-dark);
+           color: rgba(255, 255, 255, 0.9);
+           padding: 4rem 0 2rem;
+       }
+
+
+       footer .container {
+           max-width: 1280px;
+       }
+
+
+       .footer-content {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+           gap: 3rem;
+           margin-bottom: 3rem;
+       }
+
+
+       .footer-section h3 {
+           color: var(--accent-green);
+           font-size: 1.25rem;
+           margin-bottom: 1.5rem;
+           font-family: 'Montserrat', sans-serif;
+           font-weight: 700;
+       }
+
+
+       .footer-section p {
+           margin: 0.75rem 0;
+           opacity: 0.8;
+           line-height: 1.8;
+       }
+
+
+       .footer-links {
+           list-style: none;
+           padding: 0;
+       }
+
+
+       .footer-links li {
+           margin-bottom: 0.75rem;
+       }
+
+
+       .footer-links a {
+           color: rgba(255, 255, 255, 0.8);
+           text-decoration: none;
+           transition: all 0.2s ease;
+           display: inline-block;
+       }
+
+
+       .footer-links a:hover {
+           color: var(--accent-green);
+           transform: translateX(4px);
+       }
+
+
+       .social-links-footer {
+           display: flex;
+           gap: 1rem;
+           margin-top: 1.5rem;
+       }
+
+
+       .social-link-footer {
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           width: 44px;
+           height: 44px;
+           background: rgba(16, 185, 129, 0.1);
+           border-radius: 12px;
+           color: var(--accent-green);
+           text-decoration: none;
+           font-size: 1.25rem;
+           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+           border: 1px solid rgba(16, 185, 129, 0.2);
+       }
+
+
+       .social-link-footer:hover {
+           background: var(--accent-green);
+           color: white;
+           transform: translateY(-2px);
+           box-shadow: var(--shadow-md);
+           border-color: var(--accent-green);
+       }
+
+
+       .footer-bottom {
+           border-top: 1px solid rgba(255, 255, 255, 0.1);
+           padding-top: 2rem;
+           text-align: center;
+       }
+
+
+       .footer-bottom p {
+           margin: 0.5rem 0;
+           font-size: 0.875rem;
+           opacity: 0.7;
+       }
+
+
+       /* Responsive */
+       @media (max-width: 768px) {
+           nav .container {
+               flex-direction: column;
+               gap: 1rem;
+           }
+
+
+           nav ul {
+               gap: 0.25rem;
+               flex-wrap: wrap;
+               justify-content: center;
+           }
+
+
+           nav a {
+               padding: 0.5rem 1rem;
+               font-size: 0.875rem;
+           }
+
+
+           .updates-section {
+               padding: 6rem 0 4rem;
+               margin-top: 120px;
+           }
+
+
+           .updates-grid {
+               grid-template-columns: 1fr;
+               gap: 1.5rem;
+           }
+
+
+           .footer-content {
+               grid-template-columns: 1fr;
+               gap: 2rem;
+           }
+       }
+
+
+       @media (max-width: 480px) {
+           .container {
+               padding: 0 1.5rem;
+           }
+
+
+           nav .container {
+               padding: 0 1.5rem;
+           }
+
+
+           .update-content {
+               padding: 1.5rem;
+           }
+
+
+           .update-image {
+               height: 180px;
+               font-size: 3rem;
+           }
+       }
+   </style>
+</head>
+<body>
+   <nav>
+       <div class="container">
+           <a href="index.html" class="nav-logo"><img src="brickbotsLogo.png" alt="BrickBots"></a>
+           <ul>
+               <li><a href="robot.html">Robot</a></li>
+               <li><a href="updates.html">Updates</a></li>
+               <li><a href="team.html">Team</a></li>
+               <li><a href="sponsors.html">Sponsors</a></li>
+               <li><a href="contact.html">Contact</a></li>
+           </ul>
+       </div>
+   </nav>
+
+   <main>
+   <!-- Updates Section -->
+   <section class="updates-section">
+       <div class="container">
+           <h2 class="section-title">Latest Updates</h2>
+           <p class="section-subtitle">Stay up to date with our journey, achievements, and upcoming events</p>
+
+
+           <div class="updates-grid">
+               <div class="update-card">
+                   <div class="update-image">
+                       <i class="fas fa-robot"></i>
+                   </div>
+                   <div class="update-content">
+                       <div class="update-date">Competition Season</div>
+                       <h3 class="update-title">Robot Competition 25-26</h3>
+                       <p class="update-description">Our team is preparing for the upcoming FTC competition season with innovative robot designs and advanced programming techniques.</p>
+                   </div>
+               </div>
+
+
+               <div class="update-card">
+                   <div class="update-image">
+                       <i class="fas fa-trophy"></i>
+                   </div>
+                   <div class="update-content">
+                       <div class="update-date">Placeholder</div>
+                       <h3 class="update-title">Placeholder</h3>
+                       <p class="update-description">Placeholder</p>
+                   </div>
+               </div>
+
+
+               <div class="update-card">
+                   <div class="update-image">
+                       <i class="fas fa-users"></i>
+                   </div>
+                   <div class="update-content">
+                       <div class="update-date">Placeholder</div>
+                       <h3 class="update-title">Placeholder</h3>
+                       <p class="update-description">Placeholder</p>
+                   </div>
+               </div>
+           </div>
+
+
+           <div class="btn-container">
+               <a href="index.html" class="btn">Back to Home</a>
+           </div>
+       </div>
+   </section>
+   </main>
+
+   <!-- Footer -->
+   <footer>
+       <div class="container">
+           <div class="footer-content">
+               <div class="footer-section">
+                   <h3>BrickBots FTC</h3>
+                   <p><strong>Team #30688</strong></p>
+                   <p>Innovation Through Engineering</p>
+                   <p>Dedicated to advancing STEM education through robotics</p>
+               </div>
+
+
+               <div class="footer-section">
+                   <h3>Quick Links</h3>
+                   <ul class="footer-links">
+                       <li><a href="index.html">Home</a></li>
+                       <li><a href="updates.html">Updates</a></li>
+                       <li><a href="team.html">Our Team</a></li>
+                       <li><a href="contact.html">Contact Us</a></li>
+                       <li><a href="https://www.firstinspires.org/robotics/ftc" target="_blank">FIRST Tech Challenge</a></li>
+                   </ul>
+               </div>
+
+
+               <div class="footer-section">
+                   <h3>Connect With Us</h3>
+                   <div class="social-links-footer">
+                       <a href="https://www.instagram.com/brickbots.30688/" class="social-link-footer" target="_blank">
+                           <i class="fab fa-instagram"></i>
+                       </a>
+                       <a href="https://www.facebook.com/profile.php?id=61586062617029" class="social-link-footer" target="_blank">
+                           <i class="fab fa-facebook"></i>
+                       </a>
+                       <a href="mailto:brickbots.30688@gmail.com" class="social-link-footer">
+                           <i class="fas fa-envelope"></i>
+                       </a>
+                       <a href="https://www.youtube.com/@BrickbotsFTC30688" class="social-link-footer" target="_blank">
+                           <i class="fab fa-youtube"></i>
+                       </a>
+                   </div>
+                   <p style="margin-top: 1rem;">brickbots.30688@gmail.com</p>
+               </div>
+           </div>
+
+
+           <div class="footer-bottom">
+               <p>&copy; 2026 BrickBots FTC Team #30688. All rights reserved.</p>
+               <p>Part of FIRST Tech Challenge</p>
+           </div>
+       </div>
+   </footer>
+</body>
+</html>

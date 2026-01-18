@@ -19,6 +19,7 @@
            --text-secondary: #6B7280;
            --bg-light: #F9FAFB;
            --white: #FFFFFF;
+           --cobaltblue: #3D59AB;
            --gradient-primary: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #059669 100%);
            --gradient-accent: linear-gradient(135deg, #10B981 0%, #059669 100%);
            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -273,6 +274,44 @@
            position: relative;
        }
 
+       .outreach-avatar {
+           width: 100px;
+           height: 100px;
+           border-radius: 50%;
+           margin: 0 auto 1rem;
+           background: var(--text-secondary);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           box-shadow: var(--shadow-lg);
+           position: relative;
+       }
+
+       .hardware-avatar {
+           width: 100px;
+           height: 100px;
+           border-radius: 50%;
+           margin: 0 auto 1rem;
+           background: var(--cobaltblue);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           box-shadow: var(--shadow-lg);
+           position: relative;
+       }
+
+       .software-avatar {
+           width: 100px;
+           height: 100px;
+           border-radius: 50%;
+           margin: 0 auto 1rem;
+           background: var(--accent-green-dark);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           box-shadow: var(--shadow-lg);
+           position: relative;
+       }
 
        .coach-avatar {
            width: 120px;
@@ -287,18 +326,33 @@
            inset: -4px;
            border-radius: 50%;
            background: var(--gradient-accent);
-           opacity: 0.2;
+           opacity: 0;
+           z-index: -1;
+       }
+
+       .outreach-avatar::before, .hardware-avatar::before, .software-avatar::before {
+           content: '';
+           position: absolute;
+           inset: -4px;
+           border-radius: 50%;
+           background: var(--gradient-accent);
+           opacity: 0;
            z-index: -1;
        }
 
 
        .coach-avatar::before {
            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-           opacity: 0.3;
+           opacity: 0;
        }
 
 
        .team-avatar i, .coach-avatar i {
+           font-size: 2.5rem;
+           color: white;
+       }
+
+       .outreach-avatar i, .hardware-avatar i, .software-avatar i {
            font-size: 2.5rem;
            color: white;
        }
@@ -325,11 +379,26 @@
        }
 
 
-       .team-card .team-role, .coach-card .coach-role {
-           color: var(--accent-green);
+       .hardware-role {
+           color: var(--cobaltblue);
            font-weight: 600;
            margin-bottom: 0.5rem;
-           font-size: 0.875rem;
+           font-size: 0.9575rem;
+       }
+
+
+       .outreach-role {
+           color: var(--text-secondary);
+           font-weight: 600;
+           margin-bottom: 0.5rem;
+           font-size: 0.9575rem;
+       }
+
+       .team-card .team-role, .coach-card .coach-role {
+           color: var(--accent-green-dark);
+           font-weight: 600;
+           margin-bottom: 0.5rem;
+           font-size: 0.9575rem;
        }
 
 
@@ -340,9 +409,9 @@
 
 
        .team-card .team-name {
-           color: var(--text-secondary);
+           color: var(--primary-navy);
            margin-bottom: 0.5rem;
-           font-size: 0.9375rem;
+           font-size: 0.875rem;
        }
 
 
@@ -605,106 +674,112 @@
    <section class="team-section">
        <div class="container">
            <h2 class="section-title">Our Team</h2>
-           <p class="section-subtitle">Meet the talented individuals driving innovation and excellence in robotics</p>
-
+           <p class="section-subtitle">Meet the talented individuals driving innovation and excellence in robotics:</p>
+           
 
            <div class="team-grid">
+               
+               
                <div class="team-card">
-                   <div class="team-avatar">
-                       <i class="fas fa-crown"></i>
+                   <div class="hardware-avatar">
+                       <i class="fas fa-microchip"></i>
                    </div>
-                   <h3>Project Manager</h3>
-                   <div class="team-role">Leadership & Strategy</div>
-                   <div class="team-name">Ojas Deshmukh - Grade 9</div>
-                   <div class="team-desc">Strategic Leadership & Project Management</div>
-               </div>
-
-
-               <div class="team-card">
-                   <div class="team-avatar">
-                       <i class="fas fa-code"></i>
+                   <h3>Prisha Patel - Grade 9</h3>
+                   <div class="hardware-role">Hardware Team Member (Fabrication)</div>
+                   <div class="team-name">Fabrication, Building, and Assembly</div>
+                   <div class="team-desc">Assists with fabricating the robot and building the final product as well.</div>
                    </div>
-                   <h3>Software Team Lead</h3>
-                   <div class="team-role">Software Development</div>
-                   <div class="team-name">Ahaan Roychowdhury - Grade 9</div>
-                   <div class="team-desc">Java, Autonomous Systems, and Robot Programming</div>
-               </div>
 
 
                <div class="team-card">
-                   <div class="team-avatar">
+                   <div class="hardware-avatar">
                        <i class="fas fa-cogs"></i>
                    </div>
-                   <h3>Hardware Team Co-Lead</h3>
-                   <div class="team-role">Design, Engineering, and Building</div>
-                   <div class="team-name">Akshaj Madduru - Grade 9</div>
+                   <h3>Akshaj Madduru - Grade 9</h3>
+                   <div class="hardware-role">Hardware Team Co-Lead</div>
+                   <div class="team-name">Design, Engineering, and Building</div>
                    <div class="team-desc">CAD Design, Fabrication, and Assembly</div>
                </div>
 
 
                <div class="team-card">
-                   <div class="team-avatar">
+                   <div class="hardware-avatar">
+                       <i class="fas fa-cube"></i>
+                   </div>
+                   <h3>Soumya Deshmukh - Grade 9</h3>
+                   <div class="hardware-role">Hardware Team Co-Lead/Design Lead</div>
+                   <div class="team-name">CAD Design and 3D Printing</div>
+                   <div class="team-desc">3D prints many of the vital parts used for the robot, and works in robot construction.</div>
+               </div>
+
+               
+               <div class="team-card">
+                   <div class="outreach-avatar">
+                       <i class="fas fa-crown"></i>
+                   </div>
+                   <h3>Ojas Deshmukh - Grade 9</h3>
+                   <div class="outreach-role">Outreach Team Member/Website Creator</div>
+                   <div class="team-name">Project Manager/Social Media & Marketer</div>
+                   <div class="team-desc">Uses strategic leadership to keep the team on track and manages our social media presence.</div>
+               </div>
+
+
+               <div class="team-card">
+                   <div class="outreach-avatar">
                        <i class="fas fa-users"></i>
                    </div>
-                   <h3>Outreach Team Lead</h3>
-                   <div class="team-role">Spreading the Joy of STEM</div>
-                   <div class="team-name">Navika Deepak - Grade 9</div>
+                   <h3>Navika Deepak - Grade 9</h3>
+                   <div class="outreach-role">Outreach Team Lead</div>
+                   <div class="team-name">Spreads the Joy of STEM</div>
                    <div class="team-desc">STEM Workshops, Community Engagement, and Public Relations</div>
                </div>
 
 
                <div class="team-card">
-                   <div class="team-avatar">
-                       <i class="fas fa-cube"></i>
-                   </div>
-                   <h3>Hardware Team Co-Lead (Design Lead)</h3>
-                   <div class="team-role">CAD Design and 3D Printing</div>
-                   <div class="team-name">Soumya Deshmukh - Grade 9</div>
-                   <div class="team-desc">3D Printing, CAD Design, and Building</div>
-               </div>
-
-
-               <div class="team-card">
-                   <div class="team-avatar">
+                   <div class="outreach-avatar">
                        <i class="fas fa-camera"></i>
                    </div>
-                   <h3>Software Team Co-Lead (Object Detection Leader)</h3>
-                   <div class="team-role">Object Detection and Robot Programming</div>
-                   <div class="team-name">Samiya Kallu - Grade 8</div>
-                   <div class="team-desc">Object Detection, Limelight Coding, and Pattern Recognition</div>
+                   <h3>Samiya Kallu - Grade 8</h3>
+                   <div class="outreach-role">Outreach Team Co-Lead</div>
+                   <div class="team-name">Company Contactor</div>
+                   <div class="team-desc">Contacts companies for partnerships and drafts important emails for collaboration.</div>
                </div>
 
 
+
                <div class="team-card">
-                   <div class="team-avatar">
+                   <div class="software-avatar">
+                       <i class="fas fa-code"></i>
+                   </div>
+                   <h3>Ahaan Roychowdhury - Grade 9</h3>
+                   <div class="team-role">Software Team Lead</div>
+                   <div class="team-name">Autonomous and TeleOp</div>
+                   <div class="team-desc">Java, Autonomous Systems, and Robot Programming</div>
+               </div>
+               
+
+               <div class="team-card">
+                   <div class="software-avatar">
                        <i class="fas fa-tools"></i>
                    </div>
-                   <h3>Software Team Member (Build Support)</h3>
-                   <div class="team-role">Build Support & TeleOp Programming</div>
-                   <div class="team-name">Krishna Seshan - Grade 8</div>
-                   <div class="team-desc">Build Support and Manual/TeleOp Programming</div>
+                   <h3>Krishna Seshan - Grade 8</h3>
+                   <div class="team-role">Software Team/Website Co-Creator</div>
+                   <div class="team-name">Build Support & TeleOp Programming</div>
+                   <div class="team-desc">Supports with the building process and contributes to teleop programming.</div>
                </div>
 
 
                <div class="team-card">
-                   <div class="team-avatar">
+                   <div class="software-avatar">
                        <i class="fas fa-user-plus"></i>
                    </div>
-                   <h3>Outreach Team Member (Social Media & Marketing)</h3>
-                   <div class="team-role">Build Support & TeleOp Programming</div>
-                   <div class="team-name">Nivaan Sheth - Grade 8</div>
+                   <h3>Nivaan Sheth - Grade 8</h3>
+                   <div class="team-role">Software Team Member</div>
+                   <div class="team-name">Build Support & TeleOp Programming</div>
                    <div class="team-desc">Build Support and Manual/TeleOp Programming</div>
                </div>
 
 
-               <div class="team-card">
-                   <div class="team-avatar">
-                       <i class="fas fa-microchip"></i>
-                   </div>
-                   <h3>Hardware Team Member (Fabrication)</h3>
-                   <div class="team-role">Fabrication and Building</div>
-                   <div class="team-name">Prisha Patel - Grade 9</div>
-                   <div class="team-desc">Fabrication, Building, and Assembly</div>
                </div>
            </div>
        </div>
@@ -723,7 +798,7 @@
                    <div class="coach-avatar">
                        <i class="fas fa-chalkboard-teacher"></i>
                    </div>
-                   <div class="coach-name">Coach Jay Madduru</div>
+                   <div class="coach-name">Jayanth Madduru</div>
                    <div class="coach-role">Head Coach</div>
                    <p class="coach-desc">Experienced mentor providing strategic guidance and technical expertise to help our team reach new heights in robotics competition.</p>
                </div>
@@ -735,7 +810,7 @@
                    </div>
                    <div class="coach-name">Aalhad Deshmukh</div>
                    <div class="coach-role">Technical Coach</div>
-                   <p class="coach-desc">Specializing in programming and engineering, helping students develop critical problem-solving skills and technical proficiency.</p>
+                   <p class="coach-desc">Specializing in programming and engineering, helping our team develop critical problem-solving skills and technical proficiency.</p>
                </div>
 
 
@@ -773,11 +848,6 @@
                    <h3>Quick Links</h3>
                    <ul class="footer-links">
                        <li><a href="index.html">Home</a></li>
-                       <li><a href="robot.html">Robot</a></li>
-                       <li><a href="updates.html">Updates</a></li>
-                       <li><a href="team.html">Our Team</a></li>
-                       <li><a href="sponsors.html">Sponsors</a></li>
-                       <li><a href="contact.html">Contact Us</a></li>
                        <li><a href="https://www.firstinspires.org/robotics/ftc" target="_blank">FIRST Tech Challenge</a></li>
                    </ul>
                </div>

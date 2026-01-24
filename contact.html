@@ -1279,11 +1279,14 @@
 
 
        document.addEventListener('keydown', (e) => {
-           if (e.code === 'Space') {
+           const activeElement = document.activeElement;
+           const isFormInput = activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA';
+           
+           if (e.code === 'Space' && !isFormInput) {
                e.preventDefault();
                jump();
            }
-           if (e.code === 'ArrowDown') {
+           if (e.code === 'ArrowDown' && !isFormInput) {
                e.preventDefault();
                duck(true);
            }

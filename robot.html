@@ -261,9 +261,15 @@
 
        .components-grid {
            display: grid;
-           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+           grid-template-columns: repeat(3, 1fr);
            gap: 2rem;
            margin-top: 3rem;
+       }
+       
+       @media (max-width: 1024px) {
+           .components-grid {
+               grid-template-columns: 1fr;
+           }
        }
 
        .component-card {
